@@ -1,0 +1,7 @@
+# command: docker-compose -f .\docker-compose_basic_app.yml up
+# result: container created and run. 8080:5000 port mapped.
+services:
+  my-python-app:
+    image: my-python-app
+    ports:
+      - 8080:5000
