@@ -60,4 +60,25 @@ Press CTRL+C to quit
 - 2. flask 앱을 77 포트로 띄움
 ```
 
-#
+# Volumne
+볼륨(v)
+- host에 데이터를 영구 저장하는 storage 메커니즘
+- host 파일 시스템의 특정 디렉토리에 해당
+v 마운트
+- v를 container 내 디렉토리에 연결하는 과정
+- container가 해당 디렉토리 접근 -> host의 v에 저장된 데이터 접근가능
+
+- 기본적으로, host의 /var/lib/docker/volumes/{volumeName}/_data 에 저장됨
+- - (윈도우에는 /var/lib/.. 경로가 없지만 WSL 통해)
+- volumes: 설정을 통해 host의 특정 디렉토리로도 볼륨 지정 가능
+
+
+
+
+
+
+
+
+
+
+

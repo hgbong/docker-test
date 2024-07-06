@@ -1,3 +1,6 @@
+# build: docker build -t my-python-app .
+# run: docker run -p 8080:5000 my-python-app
+
 # 베이스 이미지로 Python 3.8 사용
 FROM python:3.8-slim
 
