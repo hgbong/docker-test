@@ -1,0 +1,51 @@
+# run command: docker-compose [-f docker-compose.yml] up
+services:
+  mydb:
+    container_name: mysql_db
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: test_db
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      #- ./mysql/conf.d:/etc/mysql/conf.d
+      - my_mysql_data:/var/lib/mysql
+      #- my-volume1:/var/lib/mysql
+    command:
+      - "mysqld"
+    networks:
+      - my_network
+
+  mybootapp:
+    container_name: my-bootapp-container
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # jdbc url => jdbc:{dbtype}://{hostname or IP}:{port}/{dbname}
+      # docker-compose, hostname is container name
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/test_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    depends_on:
+      - mydb
+    networks:
+      - my_network
+
+volumes:
+  my_mysql_data:
+    driver: local
+
+  # docker volume create... 으로 기 생성한 볼륨 사용 시, 다음 선언 필요함
+  #  my-volume1:
+  #    external:
+  #      true # 기 존재 여부
+
+networks:
+  my_network:

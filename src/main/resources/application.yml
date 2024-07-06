@@ -1,0 +1,11 @@
+spring:
+
+# overrided by docker-compose.yml
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: ???
+#    username: root
+#    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: none
